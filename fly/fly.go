@@ -5,7 +5,6 @@ import (
 	"os"
 	"os/exec"
 	"sort"
-
 	"github.com/AlecAivazis/survey/v2"
 )
 
@@ -41,7 +40,7 @@ func (fly *Fly) GetQuestions() []*survey.Question {
 
 func (fly *Fly) GetCommand(answer *Answer) *exec.Cmd {
 	server := fly.source.GetServer(answer.ServerName)
-	command := exec.Command("sshpass", "-p", server.Password, "ssh", "-o", "ServerAliveInterval=30", server.UserName+"@"+server.Host)
+	command := exec.Command("sshpass", "-p", server.Password, "ssh", "-p", server.Port, "-o", "ServerAliveInterval=30", server.UserName+"@"+server.Host)
 	return command
 }
 
